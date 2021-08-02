@@ -12,6 +12,10 @@
         </title>
     </head>
     <body>
+        <form method='get' action="/search/" target="_blank">
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
         <div>
         {% block body_block %}
         {% endblock %}
@@ -22,6 +26,8 @@
             {% endblock %}
         </div>
         <hr />
+
+
         <div>
             <ul>
                 {% if user.is_authenticated %}

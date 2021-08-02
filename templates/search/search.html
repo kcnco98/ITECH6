@@ -1,0 +1,19 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Search Result
+{% endblock %}
+
+{% block body_block %}
+    {% load highlight %}
+    {% if query %}
+        <h3>Search Result：</h3>
+        {% for result in page.object_list %}
+        {#<a href="{{ result.object.url}}">{{ result.object.title }}</a><br/>#}
+            <a href="{{ result.object.url }}">{%   highlight result.object.title with query max_length 100%}</a><br/>
+        {% empty %}
+            <p>No Result</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

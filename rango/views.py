@@ -174,3 +174,9 @@ def visitor_cookie_handler(request):
     else:
         request.session['last_visit'] = last_visit_cookie
     request.session['visits'] = visits
+
+
+def search(request):
+    context_dict = {}
+    response = render(request, 'search/search.html', context=context_dict) 
+    return response
