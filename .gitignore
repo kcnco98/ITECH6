@@ -40,4 +40,4 @@ db.sqlite3
 
 ###cache
 /.idea/
-*/__pycache__
+__pycache__
