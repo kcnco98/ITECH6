@@ -12,11 +12,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from datetime import datetime
 
+
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
     context_dict = {}
-    context_dict['boldmessage']= 'Crunchy, creamy, cookie, candy, cupcake!'
+    context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
 
@@ -25,14 +26,15 @@ def index(request):
     response = render(request, 'rango/index.html', context=context_dict)
 
     return response
-    
+
 
 def about(request):
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    response = render(request, 'rango/about.html', context=context_dict) 
+    response = render(request, 'rango/about.html', context=context_dict)
     return response
+
 
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -50,7 +52,14 @@ def show_category(request, category_name_slug):
         context_dict['category'] = None
         context_dict['pages'] = None
 
-    return render(request, 'rango/category.html', context=context_dict) 
+    return render(request, 'rango/category.html', context=context_dict)
+
+
+def show_all_category(request):
+    page_list = Page.objects
+    context_dict = {'categories': Category.objects.all(), 'pages': page_list}
+    return render(request, 'rango/all_categories.html', context=context_dict)
+
 
 @login_required
 def add_category(request):
@@ -65,6 +74,7 @@ def add_category(request):
             print(form.errors)
 
     return render(request, 'rango/add_category.html', {'form': form})
+
 
 @login_required
 def add_page(request, category_name_slug):
@@ -88,11 +98,11 @@ def add_page(request, category_name_slug):
                 page.views = 0
                 page.save()
                 return redirect(reverse('rango:show_category',
-                                kwargs={'category_name_slug':
-                                category_name_slug}))
+                                        kwargs={'category_name_slug':
+                                                    category_name_slug}))
             else:
                 print(form.errors)
-    context_dict = {'form': form, 'category': category} 
+    context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
 
@@ -112,7 +122,7 @@ def register(request):
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-            
+
             profile.save()
             registered = True
         else:
@@ -120,13 +130,14 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
-    return render(request, 
-                    'rango/register.html', 
-                    context={'user_form': user_form, 
-                            'profile_form': profile_form, 
-                            'registered': registered})
-                    
+
+    return render(request,
+                  'rango/register.html',
+                  context={'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered})
+
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -146,9 +157,11 @@ def user_login(request):
     else:
         return render(request, 'rango/login.html')
 
+
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
+
 
 @login_required
 def user_logout(request):
@@ -162,8 +175,8 @@ def get_server_side_cookie(request, cookie, default_val=None):
         val = default_val
     return val
 
-def visitor_cookie_handler(request):
 
+def visitor_cookie_handler(request):
     visits = int(get_server_side_cookie(request, 'visits', '1'))
     last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],
@@ -178,5 +191,5 @@ def visitor_cookie_handler(request):
 
 def search(request):
     context_dict = {}
-    response = render(request, 'search/search.html', context=context_dict) 
+    response = render(request, 'search/search.html', context=context_dict)
     return response
