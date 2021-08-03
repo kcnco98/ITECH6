@@ -55,7 +55,6 @@
                     <li class="nav-item">
                         <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:index' %}">Learning List</a>
                     </li>
-<!--                    添加锚点，跳转至页面底部-->
                     <li class="nav-item">
                         <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:index' %}">Contact</a>
                     </li>
@@ -73,15 +72,19 @@
 
 
 <!--start blank space-->
+<section class="container py-5">
+<div class="col-lg-8">
+    <form method='get' action="/search/" target="_blank">        
+        <input type="text" name="q" style="width:200px;" placeholder="Input keyword for page">           
+        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Search</button>
+    </form>
+</div>
 
-<form method='get' action="/search/" target="_blank">
-    <input type="text" name="q">
-    <input type="submit" value="Search">
-</form>
 <div>
     {% block body_block %}
     {% endblock %}
 </div>
+</section>
 <!--<div>-->
 <!--    {% block sidebar_block %}-->
 <!--    {% get_category_list category%}-->
@@ -102,8 +105,7 @@
                     <span class="text-light h5">Rango</span> <span class="text-light h5 semi-bold-600">beta</span>
                 </a>
                 <p class="text-light my-lg-4 my-2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut.
+                    Learn more on Rango!
                 </p>
                 <ul class="list-inline footer-icons light-300">
                     <li class="list-inline-item m-0">
