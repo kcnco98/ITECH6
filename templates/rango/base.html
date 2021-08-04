@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 
+<!-- Load jQuery require for isotope -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
 <body>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
@@ -53,7 +56,7 @@
                         <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:categories' %}">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:index' %}">Learning List</a>
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:learning_list' %}">Learning List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:index' %}">Contact</a>
@@ -74,8 +77,8 @@
 <!--start blank space-->
 <section class="container py-5">
 <div class="col-lg-8">
-    <form method='get' action="/search/" target="_blank">        
-        <input type="text" name="q" style="width:200px;" placeholder="Input keyword for page">           
+    <form method='get' action="/search/" target="_blank">
+        <input type="text" name="q" style="width:200px;" placeholder="Input keyword for page">
         <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Search</button>
     </form>
 </div>
@@ -219,8 +222,7 @@
 
 <!-- Bootstrap -->
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<!-- Load jQuery require for isotope -->
-<script src="{% static 'js/jquery.min.js' %}"></script>
+
 <!-- Isotope -->
 <script src="{% static 'js/isotope.pkgd.js' %}"></script>
 <!-- Page Script -->

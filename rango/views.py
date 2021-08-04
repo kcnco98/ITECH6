@@ -1,7 +1,15 @@
-from django.shortcuts import render
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views.decorators.http import require_POST
+
 from rango.models import Category
 from rango.models import Page
+from rango.models import LearningList
 from rango.forms import CategoryForm
 from django.shortcuts import redirect
 from rango.forms import PageForm
@@ -56,9 +64,34 @@ def show_category(request, category_name_slug):
 
 
 def show_all_category(request):
-    page_list = Page.objects
-    context_dict = {'categories': Category.objects.all(), 'pages': page_list}
+    context_dict = {'categories': Category.objects.all(), 'pages': Page.objects.all()}
     return render(request, 'rango/all_categories.html', context=context_dict)
+
+
+def show_learning_list(request):
+    context_dict = {}
+    try:
+
+        # 获取当前user的learning list
+        if not request.user.is_authenticated:
+            context_dict['pages'] = None
+        else:
+            learning_list = LearningList.objects.get(user=request.user)
+            pages = None
+            # 数据库有可能为空
+            try:
+                pages = Page.objects.filter(learning_list=learning_list)
+            except Page.DoesNotExist:
+                print('empty list')
+
+            context_dict['pages'] = list(pages)
+            print(pages)
+
+    except LearningList.DoesNotExist:
+
+        context_dict['pages'] = None
+
+    return render(request, 'rango/learning_list.html', context=context_dict)
 
 
 @login_required
@@ -193,3 +226,37 @@ def search(request):
     context_dict = {}
     response = render(request, 'search/search.html', context=context_dict)
     return response
+
+
+@login_required
+@require_POST
+def favourite(request):
+    if request.method == 'POST':
+        user = request.user
+        favourite_state = request.POST.get('favourite_state', None)
+        page_title = request.POST.get('title', None)
+
+        # 找到当前的page
+        page = get_object_or_404(Page, title=page_title)
+
+        try:
+            learning_list = LearningList.objects.get(user=user)
+        except LearningList.DoesNotExist:
+            learning_list = LearningList()
+            learning_list.user = user
+            learning_list.save()
+
+        # 判断当前user的learning list中是否包含该page
+        if page.learning_list.filter(user=user).exists():
+            # user has already liked this company
+            # remove like/user
+            page.learning_list.remove(learning_list)
+            message = 'You disliked this'
+        else:
+            # add a new like for a company
+            page.learning_list.add(learning_list)
+            message = 'You liked this'
+
+    ctx = {'message': message}
+    # use mimetype instead of content_type if django < 5
+    return HttpResponse(json.dumps(ctx), content_type='application/json')

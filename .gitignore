@@ -42,3 +42,5 @@ db.sqlite3
 /.idea/
 */__pycache__
 __pycache__
+migrations
+whoosh_index
