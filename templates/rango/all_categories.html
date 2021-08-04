@@ -6,15 +6,34 @@ Category
 {% endblock %}
 
 {% block body_block %}
-<div>
-    <ul>
+<!--垂直间隙有问题-->
+<section class="container py-5">
+    <div class="row projects gx-lg-5">
         {% if categories %}
-            {% for c in categories %}
-                <li><a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a></li>
-            {% endfor %}
+        {% for c in categories %}
+        <a href="{% url 'rango:show_category' c.slug %}"
+           class="col-sm-6 col-lg-4 text-decoration-none project graphic social">
+            <div class="service-work overflow-hidden card mx-5 mx-sm-0 mb-5">
+                <img class="card-img-top" src="{% static 'images/our-work-03.jpg' %}" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title light-300 text-dark">{{ c.name }}</h5>
+                    <!--                    TBD-->
+<!--                    <p class="card-text light-300 text-dark">-->
+<!--                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,-->
+<!--                        sed do eiusmod tempor incididunt ut labore et dolor.-->
+<!--                    </p>-->
+                    <span class="text-decoration-none text-primary light-300">
+                              Read more <i class='bx bxs-hand-right ms-1'></i>
+                          </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
         {% else %}
-        <li><strong>There are no categories present.</strong></li>
+        <strong>There are no categories present.</strong>
         {% endif %}
-    </ul>
-</div>
+    </div>
+</section>
+
 {% endblock %}
+

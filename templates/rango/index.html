@@ -72,7 +72,7 @@
                             {% for page in pages %}
                                 <li>               
                                 <label class="checkbox-inline">
-                                    <input class="btn btn-secondary rounded-pill px-md-3 px-4 py-1 radius-0 text-light light-30" type="button" name="{{ page.title }}" value="Like"/>
+                                    <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
                                     <a href="{{ page.url }}">{{ page.title }}</a>
                                 </label>
                                 </li>              
@@ -88,7 +88,6 @@
     </section>
 
 <script>
-console.log("Hello Runoob!");
     $('.favourite').click(function(){
           $.ajax({
                    type: "POST",
@@ -99,7 +98,7 @@ console.log("Hello Runoob!");
                           alert(response.message);
                     },
                     error: function(rs, e) {
-                           alert(rs.responseText);
+                           alert("please login");
                     }
               });
         })

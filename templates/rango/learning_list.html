@@ -6,15 +6,52 @@ Category
 {% endblock %}
 
 {% block body_block %}
-<div>
-    {% if pages %}
-        <ul>
+<section class="container overflow-hidden py-5">
+    <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+        {% if pages %}
         {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        <!--            <a href="{{ page.url }}">{{ page.title }}</a>-->
+
+        <!-- Start Recent Work -->
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <div class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'images/services-01.jpg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+                        <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
+                        <a href="{{ page.url }}" class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{ page.title }}</a>
+                        <!--                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>-->
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Recent Work -->
+
+
         {% endfor %}
-        </ul>
-    {% else %}
+        {% else %}
         <strong>There are no pages present.</strong>
-    {% endif %}
-</div>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+    $('.favourite').click(function(){
+          $.ajax({
+                   type: "POST",
+                   url: "{% url 'rango:favourite' %}",
+                   data: {'title': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                   dataType: "json",
+                   success: function(response) {
+                          alert(response.message);
+                          location.reload(true);
+                    },
+                    error: function(rs, e) {
+                           alert("please login");
+                    }
+              });
+        })
+
+
+</script>
+
 {% endblock %}
