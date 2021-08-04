@@ -63,9 +63,13 @@
                     </li>
                 </ul>
             </div>
+            <div class="col-lg-15">
+                <form method='get' action="/search/" target="_blank">
+                    <input type="text" name="q" style="width:200px;" placeholder="Input keyword for page">
+                    <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-1.5 radius-0 text-light light-300">Search</button>
+                </form>
+            </div>
             <div class="navbar align-self-center d-flex">
-                <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-                <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
                 <a class="nav-link" href="#"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
             </div>
         </div>
@@ -76,13 +80,6 @@
 
 <!--start blank space-->
 <section class="container py-5">
-<div class="col-lg-8">
-    <form method='get' action="/search/" target="_blank">
-        <input type="text" name="q" style="width:200px;" placeholder="Input keyword for page">
-        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Search</button>
-    </form>
-</div>
-
 <div>
     {% block body_block %}
     {% endblock %}

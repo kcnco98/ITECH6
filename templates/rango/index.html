@@ -6,54 +6,86 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Rango says...</h1>
-    <div>
-        {% if user.is_authenticated %}
-        howdy {{ user.username }}!
-        {% else %}
-        hey there partner!
-        {% endif %}
-        <br />
-        <strong>{{ boldmessage }}</strong>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="py-5 row d-flex align-items-center">
+                    <div class="banner-content col-lg-9 col-8 offset-2 m-lg-auto text-left py-5 pb-0">
+                        <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-6 mx-0 px-0 light-300 typo-space-line">
+                            Rango says...
+                            <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
+                        </h1>
+                        <p class="banner-body text-muted py-5 mx-2 px-0">
+                            {% if user.is_authenticated %}
+                            howdy {{ user.username }}!
+                            {% else %}
+                            hey there partner!
+                            {% endif %}
+                            <br />
+                            <strong>{{ boldmessage }}</strong>
+
+
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <h2>Most Liked Categories</h2>
-        {% if categories %}
-            <ul>
-            {% for category in categories %}
-                <li><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no categories present.</strong>
-        {% endif %}
-    </div>
-
-    <div>
-        <h2>Most Viewed Pages</h2>
-        {% if pages %}
-            <ul>
-            {% for page in pages %}
-                <li>
-<!--                    <input type="button" id="like" name="{{ company_slug }}" value="Like" />-->
-
-                <label class="checkbox-inline">
-                    <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
-                    <a href="{{ page.url }}">{{ page.title }}</a>
-                </label>
-                </li>
-
-            {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no pages present.</strong>
-        {% endif %}
-    </div>
-
-    <div>
-        <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
-    </div>
+    <section class="bg-light pt-sm-0 py-5">
+        <div class="container py-5">
+            <h1 class="h2 semi-bold-600 text-center mt-2">Most Liked Categories</h1>
+            <p class="text-center pb-5 light-300">Here are the most popular categories on Rango!</p>
+            <div class="pricing-horizontal row col-20 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                <div class="pricing-horizontal-icon col-md-3 text-center bg-secondary text-light py-4">
+                    <i class="display-1 bx bx-buildings pt-4"></i>
+                </div>
+                <div class="pricing-horizontal-body offset-lg-1 col-md-5 col-lg-4 d-flex align-items-center pl-5 pt-lg-0 pt-4">
+                    <ul class="text-left px-4 list-unstyled mb-0 light-300">
+                        {% if categories %}
+                        <ul>
+                            {% for category in categories %}
+                                <li><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <strong>There are no categories present.</strong>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5">
+            <h1 class="h2 semi-bold-600 text-center mt-2">Most Viewed Pages</h1>
+            <p class="text-center pb-5 light-300">Here are the most popular pages on Rango, check and see if you like them!</p>
+            <div class="pricing-horizontal row col-20 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                <div class="pricing-horizontal-icon col-md-3 text-center bg-secondary text-light py-4">
+                    <i class="display-1 bx bx-bell pt-4"></i>
+                </div>
+                <div class="pricing-horizontal-body offset-lg-1 col-md-5 col-lg-4 d-flex align-items-center pl-5 pt-lg-0 pt-4">
+                    <ul class="text-left px-1 list-unstyled mb-0 light-300">
+                        {% if pages %}
+                            <ul>
+                            {% for page in pages %}
+                                <li>               
+                                <label class="checkbox-inline">
+                                    <input class="btn btn-secondary rounded-pill px-md-3 px-4 py-1 radius-0 text-light light-30" type="button" name="{{ page.title }}" value="Like"/>
+                                    <a href="{{ page.url }}">{{ page.title }}</a>
+                                </label>
+                                </li>              
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <strong>There are no pages present.</strong>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <script>
 console.log("Hello Runoob!");
