@@ -111,7 +111,7 @@ a:focus {
 /* Content */
 
 .grid {
-
+padding:0;
 }
 
 .grid__item {

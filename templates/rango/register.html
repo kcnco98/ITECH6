@@ -2,21 +2,48 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Register
+Register
 {% endblock %}
 
 {% block body_block %}
 <h1>Register for Rango</h1>
 {% if registered %}
-Rango says: <strong>thank you for registering!</strong>
-<a href="{% url 'rango:index' %}">Return to the homepage.</a><br />
+    Rango says: <strong>thank you for registering!</strong>
+    <a href="{% url 'rango:index' %}">Return to the homepage.</a><br/>
 {% else %}
-Rango says: <strong>register here!</strong><br />
-<form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    <input type="submit" name="submit" value="Register" />
-</form>
+    Rango says: <strong>register here!</strong><br/>
+    <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+         {% for field in user_form %}
+            <div class="col-lg-6 mb-4">
+                <div class="form-floating">
+                    {{ field }}
+                    <label for="floatingname light-300">{{ field.name }}</label>
+                </div>
+            </div>
+            {{ field.errors }}
+        {% endfor %}
+
+        {% for field in profile_form %}
+        {% if field.name == 'website' %}
+            <div class="col-lg-6 mb-4">
+                <div class="form-floating">
+                    {{ field }}
+                    <label for="floatingname light-300">{{ field.name }}</label>
+                </div>
+            </div>
+            {{ field.errors }}
+        {% else %}
+            {{ field }}
+        {% endif %}
+        {% endfor %}
+
+        <div class="col-md-12 col-12 m-auto text-end">
+            <button type="submit" name="submit"
+                    class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Register
+            </button>
+        </div>
+    </form>
 {% endif %}
 {% endblock %}
