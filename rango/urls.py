@@ -17,4 +17,5 @@ urlpatterns = [
     path('categories/', views.show_all_category, name='categories'),
     path('learning_list/', views.show_learning_list, name='learning_list'),
     path('favourite/', views.favourite, name='favourite'),
+    path('contact/', views.contact, name='contact'),
 ]

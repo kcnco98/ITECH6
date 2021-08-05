@@ -6,6 +6,12 @@
 {% endblock %}
 
 {% block body_block %}
+
+<div id="heart">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
             <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
@@ -61,34 +67,45 @@
         <div class="container py-5">
             <h1 class="h2 semi-bold-600 text-center mt-2">Most Viewed Pages</h1>
             <p class="text-center pb-5 light-300">Here are the most popular pages on Rango, check and see if you like them!</p>
-            <div class="pricing-horizontal row col-20 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                <div class="pricing-horizontal-icon col-md-3 text-center bg-secondary text-light py-4">
-                    <i class="display-1 bx bx-bell pt-4"></i>
-                </div>
-                <div class="pricing-horizontal-body offset-lg-1 col-md-5 col-lg-4 d-flex align-items-center pl-5 pt-lg-0 pt-4">
-                    <ul class="text-left px-1 list-unstyled mb-0 light-300">
-                        {% if pages %}
-                            <ul>
-                            {% for page in pages %}
-                                <li>               
-                                <label class="checkbox-inline">
-                                    <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
-                                    <a href="{{ page.url }}">{{ page.title }}</a>
-                                </label>
-                                </li>              
-                            {% endfor %}
-                            </ul>
-                        {% else %}
-                            <strong>There are no pages present.</strong>
-                        {% endif %}
-                    </ul>
+            <section class="container overflow-hidden py-5">
+    <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+        {% if pages %}
+        {% for page in pages %}
+        <!--            <a href="{{ page.url }}">{{ page.title }}</a>-->
+
+        <!-- Start Recent Work -->
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <div class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'images/services-01.jpg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+
+                        <ol class="grid">
+                            <div class="grid__item">
+                                <button name="{{ page.title }}" class="icobutton icobutton--heart"><span
+                                        class="fa fa-heart"></span></button>
+                            </div>
+                        </ol>
+                        <a href="{{ page.url }}" class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{ page.title }}</a>
+                        <!--                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>-->
+                    </div>
                 </div>
             </div>
+        </div><!-- End Recent Work -->
+
+
+        {% endfor %}
+        {% else %}
+        <strong>There are no pages present.</strong>
+        {% endif %}
+    </div>
+</section>
+
         </div>
     </section>
 
 <script>
-    $('.favourite').click(function(){
+    $('.icobutton').click(function(){
           $.ajax({
                    type: "POST",
                    url: "{% url 'rango:favourite' %}",
@@ -96,6 +113,7 @@
                    dataType: "json",
                    success: function(response) {
                           alert(response.message);
+                          location.reload(true);
                     },
                     error: function(rs, e) {
                            alert("please login");
@@ -103,6 +121,10 @@
               });
         })
 
+
 </script>
+
+<script src="{% static 'js/mo.min.js' %}"></script>
+<script src="{% static 'js/demo.js' %}"></script>
 
 {% endblock %}

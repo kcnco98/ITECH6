@@ -260,3 +260,7 @@ def favourite(request):
     ctx = {'message': message}
     # use mimetype instead of content_type if django < 5
     return HttpResponse(json.dumps(ctx), content_type='application/json')
+
+
+def contact(request):
+    return render(request, 'rango/contact.html')

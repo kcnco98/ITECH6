@@ -6,6 +6,9 @@ Category
 {% endblock %}
 
 {% block body_block %}
+
+
+
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         {% if pages %}
@@ -18,7 +21,13 @@ Category
                 <img class="service card-img" src="{% static 'images/services-01.jpg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
-                        <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
+
+                        <ol class="grid">
+                            <div class="grid__item">
+                                <button name="{{ page.title }}" class="icobutton icobutton--heart"><span
+                                        class="fa fa-heart"></span></button>
+                            </div>
+                        </ol>
                         <a href="{{ page.url }}" class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{ page.title }}</a>
                         <!--                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>-->
                     </div>
@@ -35,7 +44,7 @@ Category
 </section>
 
 <script>
-    $('.favourite').click(function(){
+    $('.icobutton').click(function(){
           $.ajax({
                    type: "POST",
                    url: "{% url 'rango:favourite' %}",
@@ -53,5 +62,8 @@ Category
 
 
 </script>
+
+<script src="{% static 'js/mo.min.js' %}"></script>
+<script src="{% static 'js/demo.js' %}"></script>
 
 {% endblock %}

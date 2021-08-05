@@ -23,10 +23,18 @@
     <link rel="stylesheet" href="{% static 'css/templatemo.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.5.0/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/zzsc-demo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icons.css' %}" />
 </head>
 
 <!-- Load jQuery require for isotope -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- Custom -->
+<script src="{% static 'js/custom.js' %}"></script>
+
+<script src="{% static 'js/mo.min.js' %}"></script>
+<script src="{% static 'js/demo.js' %}"></script>
 
 <body>
 <!-- Header -->
@@ -59,7 +67,7 @@
                         <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:learning_list' %}">Learning List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:index' %}">Contact</a>
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'rango:contact' %}">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -249,8 +257,7 @@
 </script>
 <!-- Templatemo -->
 <script src="{% static 'js/templatemo.js' %}"></script>
-<!-- Custom -->
-<script src="{% static 'js/custom.js' %}"></script>
+
 
 </body>
 
