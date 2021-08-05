@@ -44,8 +44,6 @@ class Page(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    learning_list = models.OneToOneField(LearningList, default=None, null=True,on_delete=models.CASCADE)
-
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 

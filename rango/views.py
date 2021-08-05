@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 
-from rango.models import Category
+from rango.models import Category, UserProfile
 from rango.models import Page
 from rango.models import LearningList
 from rango.forms import CategoryForm
@@ -264,3 +264,26 @@ def favourite(request):
 
 def contact(request):
     return render(request, 'rango/contact.html')
+
+
+@login_required
+def user_profile(request):
+    if request.method == 'POST':
+        profile_form = UserProfileForm(request.POST, request.FILES)
+
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            #profile.website = request.FILES['website']
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            profile.save()
+        else:
+            print(profile_form.errors)
+    else:
+        profile_form = UserProfileForm()
+    context_dict = {}
+    user_profile = UserProfile.objects.get(user=request.user)
+    context_dict['user_profile'] = user_profile
+    context_dict['profile_form'] = profile_form
+    return render(request, 'rango/user_profile.html', context=context_dict)
