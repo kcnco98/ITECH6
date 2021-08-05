@@ -23,8 +23,13 @@ Unknown Category
             <div class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                 <img class="service card-img" src="{% static 'images/services-01.jpg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <input class="favourite" type="button" name="{{ page.title }}" value="Like"/>
+                    <div class="service-work-content text-light">
+                        <ol class="grid">
+                            <div class="grid__item">
+                                <button name="{{ page.title }}" class="icobutton icobutton--heart"><span
+                                        class="fa fa-heart"></span></button>
+                            </div>
+                        </ol>
                         <a href="{{ page.url }}" class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{ page.title }}</a>
                         <!--                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>-->
                     </div>
@@ -49,7 +54,7 @@ The specified category does not exist.
 {% endif %}
 
 <script>
-    $('.favourite').click(function(){
+    $('.icobutton').click(function(){
           $.ajax({
                    type: "POST",
                    url: "{% url 'rango:favourite' %}",

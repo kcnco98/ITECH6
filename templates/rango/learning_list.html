@@ -6,9 +6,7 @@ Category
 {% endblock %}
 
 {% block body_block %}
-
-
-
+<h1>Here are some links you are interested in</h1>
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         {% if pages %}
@@ -20,8 +18,7 @@ Category
             <div class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                 <img class="service card-img" src="{% static 'images/services-01.jpg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-
+                    <div class="service-work-content text-light">
                         <ol class="grid">
                             <div class="grid__item">
                                 <button name="{{ page.title }}" class="icobutton icobutton--heart"><span

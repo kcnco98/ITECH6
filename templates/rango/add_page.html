@@ -16,9 +16,18 @@
             {% for field in form.visible_fields %}
                 {{ field.errors }}
                 {{ field.help_text }}
-                {{ field }}
+            <div class="col-lg-6 mb-4">
+                <div class="form-floating">
+                    {{ field }}
+                    <label for="floatingname light-300">{{ field.name }}</label>
+                </div>
+            </div>
             {% endfor %}
-            <input type="submit" name="submit" value="Add Page" />
+            <div class="col-md-12 col-12 m-auto text-end">
+                <button type="submit" name="submit"
+                        class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Add Page
+                </button>
+            </div>
         </form>
     </div>
 {% endblock %}
