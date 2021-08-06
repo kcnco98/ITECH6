@@ -45,3 +45,5 @@ __pycache__
 migrations
 whoosh_index
 /venv/
+__init__.py
+profile_images
