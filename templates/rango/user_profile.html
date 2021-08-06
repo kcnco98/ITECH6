@@ -8,11 +8,11 @@
 {% block body_block %}
 <h3>Hi {{ user.username }}!</h3>
 <div>Your website: {{ user_profile.website }}</div>
-<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
-    width="300"
-    height="300"
-    alt="{{ user.username }}'s profile image" />
-<br />
+    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+        width="300"
+        height="300"
+        alt="{{ user.username }}'s profile image" />
+    <br />
 <div>
 <form method="post" action="." enctype="multipart/form-data">
     {% csrf_token %}

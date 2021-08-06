@@ -88,6 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST':'127.0.0.1',
+        'PORT':'8000'
     }
 }
 
@@ -142,6 +144,7 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 SITE_ID = 1
+#SITE = "127.0.0.1:8000"
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -165,7 +168,7 @@ EMAIL_HOST_PASSWORD = 'yfayfdadlknadfgc'
 EMAIL_SUBJECT_PREFIX = u'[Sercheif]'
 EMIAL_USE_TLS = False
 EMAIL_FROM = '2822385747@qq.com'
-DEFAULT_FROM_EMAIL = '2822385747@qq.com'
+DEFAULT_FROM_EMAIL = 'Rango Team<2822385747@qq.com>'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/'

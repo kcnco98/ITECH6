@@ -268,22 +268,20 @@ def contact(request):
 
 @login_required
 def user_profile(request):
+    profile_form = UserProfileForm()
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, request.FILES)
-
         if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.user = request.user
-            #profile.website = request.FILES['website']
+            profile = UserProfile.objects.get_or_create(user=request.user)[0]
+            profile.website = request.POST.get('website', None)
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
             profile.save()
         else:
             print(profile_form.errors)
-    else:
-        profile_form = UserProfileForm()
+
     context_dict = {}
-    user_profile = UserProfile.objects.get(user=request.user)
+    user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
     context_dict['user_profile'] = user_profile
     context_dict['profile_form'] = profile_form
     return render(request, 'rango/user_profile.html', context=context_dict)
