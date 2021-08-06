@@ -4,8 +4,19 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 import django
 django.setup()
 from rango.models import Category, Page
+from django.contrib.sites.models import Site
 
 def populate():
+
+    host ='127.0.0.1:8000'
+    try:
+        sit = Site.objects.get(domain = 'example.com')
+        sit.domain = host
+        sit.name = host
+        sit.save()
+    except:
+        sit = Site.objects.get_or_create(host)[0]
+        sit.save()
 
     python_pages = [
         {'title': 'Official Python Tutorial',
